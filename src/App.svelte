@@ -1,4 +1,5 @@
 <script>
+  import { Router, Route, Link } from "svelte-navigator";
   import Band from "./components/Band.svelte";
   import BandSelector from "./components/BandSelector.svelte";
   import { Resistor } from "./components/colors";
@@ -9,29 +10,45 @@
 <svelte:head>
   <title>Resistor</title>
 </svelte:head>
-<main>
-  <h1 class="title">Calculadora de resistencias</h1>
-  <section class="resistor-container">
-    <div class="wire" />
-    <div class="bands-container">
-      <Band color={resistor.band1} />
-      <Band color={resistor.band2} />
-      <Band color={resistor.band3} />
-      <Band color={resistor.band4} />
-    </div>
-    <div class="wire" />
-  </section>
-  <p class="resistor-value">Valor: {resistor.value()}&Omega;</p>
-  <section class="resistor-options">
-    <BandSelector band={1} bind:bandColor={resistor.band1} />
-    <BandSelector band={2} bind:bandColor={resistor.band2} />
-    <BandSelector band={3} bind:bandColor={resistor.band3} />
-  </section>
-  <footer>
-    Creado por <a href="https://github.com/BloodBoy21">Alan B.</a> para
-    ingeniería electrónica del <a href="http://itesco.edu.mx/">ITESCO</a>
-  </footer>
-</main>
+<Router>
+  <header>
+    <nav class="links">
+      <ul>
+        <li><Link to="/">Bandas</Link></li>
+        <li><Link to="calculator">Calculadora</Link></li>
+      </ul>
+      <img src="/images/logo.png" alt="logo" class="logo" />
+    </nav>
+  </header>
+  <main>
+    <Route path="/">
+      <h1 class="title">Calculadora de resistencias</h1>
+      <section class="resistor-container">
+        <div class="wire" />
+        <div class="bands-container">
+          <Band color={resistor.band1} />
+          <Band color={resistor.band2} />
+          <Band color={resistor.band3} />
+          <Band color={resistor.band4} />
+        </div>
+        <div class="wire" />
+      </section>
+      <p class="resistor-value">Valor: {resistor.value()}&Omega;</p>
+      <section class="resistor-options">
+        <BandSelector band={1} bind:bandColor={resistor.band1} />
+        <BandSelector band={2} bind:bandColor={resistor.band2} />
+        <BandSelector band={3} bind:bandColor={resistor.band3} />
+      </section>
+    </Route>
+    <Route path="/conversion">
+      <h1 class="title">Conversor de resistencias</h1>
+    </Route>
+    <footer>
+      Creado por <a href="https://github.com/BloodBoy21">Alan B.</a> para
+      ingeniería electrónica del <a href="http://itesco.edu.mx/">ITESCO</a>
+    </footer>
+  </main>
+</Router>
 
 <style>
   :global(body) {
@@ -41,11 +58,47 @@
   }
   :global(*) {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   .title {
     font-size: 2em;
     text-align: center;
     margin-bottom: 1em;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #1a171e;
+    padding: 0.7rem;
+  }
+  header nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  header nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    gap: 0.5rem;
+  }
+  .links :global(a) {
+    color: #ffff;
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease-in-out;
+  }
+  .logo {
+    width: 50px;
+    position: relative;
+    margin-left: auto;
   }
   main {
     text-align: center;

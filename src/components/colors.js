@@ -74,10 +74,6 @@ export class Resistor {
 
   _parseValue(value) {
     const valueSize = value.toString().length;
-    const getNonZeroValue = (value) => {
-      value = value.toString();
-      return value.replace(/0/g, "");
-    };
     if (valueSize < 4) return value;
     let multipler = "1".padEnd(valueSize, "0");
     multipler = parseInt(multipler, 10);
