@@ -83,7 +83,6 @@ export class Resistor {
     multipler = parseInt(multipler, 10);
     const simbol = bigValues(multipler);
     const result = value / DIVISORS[simbol] ?? 1;
-    debugger;
     return `${result}${simbol}`;
   }
 }
