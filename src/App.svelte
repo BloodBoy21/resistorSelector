@@ -6,6 +6,9 @@
   const resistor = new Resistor();
 </script>
 
+<svelte:head>
+  <title>Resistor</title>
+</svelte:head>
 <main>
   <h1 class="title">Calculadora de resistencias</h1>
   <section class="resistor-container">
