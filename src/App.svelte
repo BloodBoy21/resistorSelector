@@ -3,6 +3,7 @@
   import Band from "./components/Band.svelte";
   import BandSelector from "./components/BandSelector.svelte";
   import { Resistor } from "./components/colors";
+  import Calculator from "./Calculator.svelte";
 
   const resistor = new Resistor();
 </script>
@@ -40,14 +41,14 @@
         <BandSelector band={3} bind:bandColor={resistor.band3} />
       </section>
     </Route>
-    <Route path="/conversion">
-      <h1 class="title">Conversor de resistencias</h1>
+    <Route path="/calculator">
+      <Calculator />
     </Route>
-    <footer>
-      Creado por <a href="https://github.com/BloodBoy21">Alan B.</a> para
-      ingeniería electrónica del <a href="http://itesco.edu.mx/">ITESCO</a>
-    </footer>
   </main>
+  <footer>
+    Creado por <a href="https://github.com/BloodBoy21">Alan B.</a> para
+    ingeniería electrónica del <a href="http://itesco.edu.mx/">ITESCO</a>
+  </footer>
 </Router>
 
 <style>

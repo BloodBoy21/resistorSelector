@@ -34,7 +34,23 @@ const bigValues = (value) => {
   if (value < 999) return "";
   return value <= 999_999 ? "K" : value <= 999_999_999 ? "M" : "G";
 };
-
+/**
+ *
+ * @param {Number} value
+ * @returns {String}
+ */
+export function parseValue(value) {
+  let valueSize = value.toString().length;
+  if (valueSize < 4 || value < 999) return value;
+  if (value.toString().includes("."))
+    valueSize = value.toString().split(".")[0].length;
+  let multiplier = "1".padEnd(valueSize, "0");
+  multiplier = parseInt(multiplier, 10);
+  const simbol = bigValues(multiplier);
+  const divisor = !isNaN(DIVISORS[simbol]) ? DIVISORS[simbol] : 1;
+  const result = value / divisor;
+  return `${result}${simbol}`;
+}
 export class Resistor {
   constructor() {
     this.band1 = COLORS.brown;
@@ -69,16 +85,6 @@ export class Resistor {
     const bands = [this.band1, this.band2];
     let value = bands.reduce((acc, band) => acc + this.bandValue(band), "");
     value = parseInt(value, 10) * this.getMultiplier();
-    return this._parseValue(value);
-  }
-
-  _parseValue(value) {
-    const valueSize = value.toString().length;
-    if (valueSize < 4) return value;
-    let multipler = "1".padEnd(valueSize, "0");
-    multipler = parseInt(multipler, 10);
-    const simbol = bigValues(multipler);
-    const result = value / DIVISORS[simbol] ?? 1;
-    return `${result}${simbol}`;
+    return parseValue(value);
   }
 }
