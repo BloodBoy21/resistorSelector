@@ -124,6 +124,9 @@
     height: clamp(100px, 180px);
     border-radius: 9px;
   }
+  :global(footer) {
+    display: none;
+  }
   @media (max-width: 480px) {
     .opt-btn {
       font-size: 0.8rem;
@@ -131,9 +134,6 @@
     .btn-container {
       margin-top: 0.8rem;
       height: auto;
-    }
-    :global(footer) {
-      position: fixed;
     }
   }
 </style>
